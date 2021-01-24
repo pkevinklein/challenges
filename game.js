@@ -1,5 +1,19 @@
 class Game {
-  constructor() {}
+  constructor() {
+    this.tiePile = [];
+    this.playerHand = {
+      "player-1": [],
+      "player-2": [],
+    };
+    this.discardPile = {
+      "player-1": [],
+      "player-2": [],
+    };
+    this.init();
+  }
+  init() {
+    let deck = Deck.fullSuit();
+  }
   //
   // split the decks
   // pick the top card
