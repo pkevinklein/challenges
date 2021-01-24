@@ -91,10 +91,4 @@ function flipCards() {
   }
 }
 
-function isRoundWinner(cardOne, cardTwo) {
-  return cardOne.value > cardTwo.value;
-}
-
-function isGameOver(deck) {
-  return deck.cards.length === 0 && deck.discardPile.length === 0;
-}
+//
