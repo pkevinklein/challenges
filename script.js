@@ -7,7 +7,7 @@ let gameOver = false;
 function startGame() {
   const deck = new Deck();
   console.log("starting");
-  deck.shuffleCards(deck.cards);
+  deck.shuffleCards();
   const deckMidPoint = Math.ceil(deck.numberOfCards / 2);
   player1Deck = new Deck(deck.cards.slice(0, deckMidPoint));
   player2Deck = new Deck(deck.cards.slice(deckMidPoint, deck.cards.length));
@@ -38,7 +38,7 @@ function flipCards() {
     player2Card = player2Deck.cards.shift();
   } else {
     if (player1Deck.cards.length == 0 && player1Deck.discardPile.length > 0) {
-      player1Deck.shuffleCards(player1Deck.discardPile);
+      player1Deck.shuffleCards();
       //   player1Deck.cards = [...player1Deck.discardPile];
       player1Deck.discardPile.forEach((card) => player1Deck.cards.push(card));
       player1Deck.discardPile = [];
@@ -46,7 +46,7 @@ function flipCards() {
       player2Card = player2Deck.cards.shift();
     }
     if (player2Deck.cards.length == 0 && player2Deck.discardPile.length > 0) {
-      player2Deck.shuffleCards(player2Deck.discardPile);
+      player2Deck.shuffleCards();
       //   player2Deck.cards = [...player2Deck.discardPile];
       player2Deck.discardPile.forEach((card) => player2Deck.cards.push(card));
 
