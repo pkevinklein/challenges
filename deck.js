@@ -7,13 +7,20 @@ export default class Deck {
     this.numberOfCards = this.cards.length;
     this.discardPile = [];
   }
-  shuffleCards(cards) {
-    for (let i = cards.length - 1; i > 0; i--) {
+  shuffleCards() {
+    this.cards = this._shuffleCards(this.cards);
+  }
+  _shuffleCards([...cards]) {
+    for (let i = cards.length - 1; i >= 0; i--) {
       const newIndex = Math.floor(Math.random() * (i + 1));
       const oldValue = cards[newIndex];
       cards[newIndex] = cards[i];
       cards[i] = oldValue;
     }
+    return cards;
+  }
+  hasCards() {
+    return this.cards.length > 0;
   }
 }
 
