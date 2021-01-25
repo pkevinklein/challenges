@@ -2,8 +2,9 @@ const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const suits = ["♠", "♣", "♥", "♦"];
 
 export default class Deck {
-  constructor() {
+  constructor(cards = fullSuit()) {
     this.cards = cards;
+    this.discardPile = [];
   }
   shuffleCards() {
     this.cards = this._shuffleCards(this.cards);
@@ -32,7 +33,7 @@ class Card {
   }
 }
 
-function newDeck() {
+function fullSuit() {
   return suits.flatMap((suit) => {
     return values.map((value) => new Card(value, suit));
   });

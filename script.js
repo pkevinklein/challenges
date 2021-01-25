@@ -1,4 +1,5 @@
 import Deck from "./deck.js";
+import Game from "./game.js";
 
 let player1Deck, player2Deck;
 let tiePile = [];
@@ -20,7 +21,8 @@ function startGame() {
 }
 
 startGame();
-
+// const game = new Game();
+// game.init();
 function flipCards() {
   if (isGameOver(player1Deck)) {
     console.log("Player 2 wins the game!");
@@ -88,6 +90,13 @@ function flipCards() {
     console.log("No winner in this round");
     tiePile.push(player1Card, player2Card);
     console.log(tiePile);
+  }
+  function isRoundWinner(cardOne, cardTwo) {
+    return cardOne.value > cardTwo.value;
+  }
+
+  function isGameOver(deck) {
+    return deck.cards.length === 0 && deck.discardPile.length === 0;
   }
 }
 

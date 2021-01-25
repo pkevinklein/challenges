@@ -1,4 +1,6 @@
-class Game {
+import Deck from "./deck.js";
+
+export default class Game {
   constructor() {
     this.tiePile = [];
     this.playerHand = {
@@ -12,7 +14,8 @@ class Game {
     this.init();
   }
   init() {
-    let deck = Deck.fullSuit();
+    let deck = new Deck();
+    return deck.fullSuit();
   }
   //
   // split the decks
@@ -21,11 +24,11 @@ class Game {
   //
 
   // compare the cards
-  isRoundWinner(cardOne, cardTwo) {
-    return cardOne.value > cardTwo.value;
-  }
+  //   isRoundWinner(cardOne, cardTwo) {
+  //     return cardOne.value > cardTwo.value;
+  //   }
 
-  isGameOver(deck) {
-    return deck.cards.length === 0 && deck.discardPile.length === 0;
-  }
+  //   isGameOver(deck) {
+  //     return deck.cards.length === 0 && deck.discardPile.length === 0;
+  //   }
 }
