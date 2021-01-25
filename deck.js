@@ -3,15 +3,15 @@ const suits = ["♠", "♣", "♥", "♦"];
 
 export default class Deck {
   constructor(cards = fullSuit()) {
-    this.cards = cards;
+    this.drawPile = cards;
     this.discardPile = [];
-    this.numberOfCards = this.cards.length;
+    this.numberOfCards = this.numberOfCards();
   }
   shuffleCards() {
-    this.cards = this._shuffleCards(this.cards);
+    this.drawPile = this._shuffleCards(this.drawPile);
   }
   numberOfCards() {
-    return this.cards.length;
+    return this.drawPile.length;
   }
   _shuffleCards([...cards]) {
     for (let i = cards.length - 1; i >= 0; i--) {
@@ -22,8 +22,12 @@ export default class Deck {
     }
     return cards;
   }
+  _shuffleDiscardPile(player) {
+    player.drawPile = _shuffleCards(player.discardPile);
+    player.drawPile = [];
+  }
   hasCards() {
-    return this.cards.length > 0;
+    return this.drawPile.length > 0;
   }
   hasDiscartedCards() {
     return this.discardPile.length > 0;

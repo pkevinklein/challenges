@@ -4,15 +4,17 @@ let player1Deck, player2Deck;
 let tiePile = [];
 let gameOver = false;
 
-function startGame() {
+export function startGame() {
   const deck = new Deck();
   console.log("starting");
   deck.shuffleCards();
-  const deckMidPoint = Math.ceil(deck.cards.length / 2);
-  player1Deck = new Deck(deck.cards.slice(0, deckMidPoint));
-  player2Deck = new Deck(deck.cards.slice(deckMidPoint, deck.cards.length));
-  console.log(deck.cards);
-  console.log(player1Deck.cards, player2Deck.cards);
+  const deckMidPoint = Math.ceil(deck.drawPile.length / 2);
+  player1Deck = new Deck(deck.drawPile.slice(0, deckMidPoint));
+  player2Deck = new Deck(
+    deck.drawPile.slice(deckMidPoint, deck.drawPile.length)
+  );
+  console.log(deck.drawPile);
+  console.log(player1Deck.drawPile, player2Deck.drawPile);
   while (!gameOver) {
     flipCards();
   }
@@ -20,7 +22,7 @@ function startGame() {
 
 startGame();
 
-function flipCards() {
+export function flipCards() {
   if (isGameOver(player1Deck)) {
     console.log("Player 2 wins the game!");
     gameOver = true;
@@ -33,30 +35,34 @@ function flipCards() {
   let player1Card;
   let player2Card;
   if (player1Deck.hasCards() && player2Deck.hasCards()) {
-    player1Card = player1Deck.cards.shift();
-    player2Card = player2Deck.cards.shift();
+    player1Card = player1Deck.drawPile.shift();
+    player2Card = player2Deck.drawPile.shift();
   } else {
     if (!player1Deck.hasCards() && player1Deck.hasDiscartedCards()) {
       player1Deck.shuffleCards(player1Deck.discardPile);
-      player1Deck.discardPile.forEach((card) => player1Deck.cards.push(card));
+      player1Deck.discardPile.forEach((card) =>
+        player1Deck.drawPile.push(card)
+      );
       player1Deck.discardPile = [];
     }
     if (!player2Deck.hasCards() && player2Deck.hasDiscartedCards()) {
       player2Deck.shuffleCards(player2Deck.discardPile);
-      player2Deck.discardPile.forEach((card) => player2Deck.cards.push(card));
+      player2Deck.discardPile.forEach((card) =>
+        player2Deck.drawPile.push(card)
+      );
       player2Deck.discardPile = [];
     }
-    player1Card = player1Deck.cards.shift();
-    player2Card = player2Deck.cards.shift();
+    player1Card = player1Deck.drawPile.shift();
+    player2Card = player2Deck.drawPile.shift();
   }
   console.log(
     `Player 1 (${
-      player1Deck.cards.length + player1Deck.discardPile.length + 1
+      player1Deck.drawPile.length + player1Deck.discardPile.length + 1
     } cards): ${player1Card.value}${player1Card.suit}`
   );
   console.log(
     `Player 2 (${
-      player2Deck.cards.length + player2Deck.discardPile.length + 1
+      player2Deck.drawPile.length + player2Deck.discardPile.length + 1
     } cards): ${player2Card.value}${player2Card.suit}`
   );
   if (isRoundWinner(player1Card, player2Card)) {
@@ -79,10 +85,10 @@ function flipCards() {
   }
 }
 
-function isRoundWinner(cardOne, cardTwo) {
+export function isRoundWinner(cardOne, cardTwo) {
   return cardOne.value > cardTwo.value;
 }
 
-function isGameOver(deck) {
-  return deck.cards.length === 0 && deck.discardPile.length === 0;
+export function isGameOver(deck) {
+  return deck.drawPile.length === 0 && deck.discardPile.length === 0;
 }
