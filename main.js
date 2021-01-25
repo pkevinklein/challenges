@@ -7,10 +7,12 @@ let gameOver = false;
 function startGame() {
   const deck = new Deck();
   console.log("starting");
-  deck.shuffleCards(deck.cards);
-  const deckMidPoint = Math.ceil(deck.numberOfCards / 2);
+  deck.shuffleCards();
+  const deckMidPoint = Math.ceil(deck.cards.length / 2);
   player1Deck = new Deck(deck.cards.slice(0, deckMidPoint));
   player2Deck = new Deck(deck.cards.slice(deckMidPoint, deck.cards.length));
+  console.log(deck.cards);
+  console.log(player1Deck.cards, player2Deck.cards);
   while (!gameOver) {
     flipCards();
   }

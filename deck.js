@@ -5,6 +5,7 @@ export default class Deck {
   constructor(cards = fullSuit()) {
     this.cards = cards;
     this.discardPile = [];
+    this.numberOfCards = this.cards.length;
   }
   shuffleCards() {
     this.cards = this._shuffleCards(this.cards);
@@ -23,6 +24,9 @@ export default class Deck {
   }
   hasCards() {
     return this.cards.length > 0;
+  }
+  hasDiscartedCards() {
+    return this.discardPile.length > 0;
   }
 }
 

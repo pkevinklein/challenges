@@ -44,8 +44,6 @@ function flipCards() {
       //   player1Deck.cards = [...player1Deck.discardPile];
       player1Deck.discardPile.forEach((card) => player1Deck.cards.push(card));
       player1Deck.discardPile = [];
-      player1Card = player1Deck.cards.shift();
-      player2Card = player2Deck.cards.shift();
     }
     if (player2Deck.cards.length == 0 && player2Deck.discardPile.length > 0) {
       player2Deck.shuffleCards();
@@ -53,9 +51,9 @@ function flipCards() {
       player2Deck.discardPile.forEach((card) => player2Deck.cards.push(card));
 
       player2Deck.discardPile = [];
-      player1Card = player1Deck.cards.shift();
-      player2Card = player2Deck.cards.shift();
     }
+    player1Card = player1Deck.cards.shift();
+    player2Card = player2Deck.cards.shift();
   }
   console.log(
     `Player 1 (${
