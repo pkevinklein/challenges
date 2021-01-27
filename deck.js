@@ -22,9 +22,9 @@ export default class Deck {
     }
     return cards;
   }
-  _shuffleDiscardPile(player) {
-    player.drawPile = _shuffleCards(player.discardPile);
-    player.drawPile = [];
+  _shuffleDiscardPile() {
+    this.drawPile = this._shuffleCards(this.discardPile);
+    this.discardPile = [];
   }
   hasCards() {
     return this.drawPile.length > 0;
